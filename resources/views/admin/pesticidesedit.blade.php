@@ -56,6 +56,8 @@ Dashboard
 {{  csrf_field()  }}
 <!-- CSRF Token -->
 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+<input type="hidden" name="pesticidesID" value="{{$pesticides_data[0]->PesticideID}}" />
+
 
 <fieldset>
 

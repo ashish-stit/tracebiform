@@ -78,11 +78,12 @@ class PesticidesController extends Controller
 		   return $this->respondWithError(500,"Internal Server Error!",array());
 		}
     }
-    public function pesticidesedit($PesticideID)
+    public function pesticidesedit($p_PesticideID)
     {
     	try
     	{
-    		$pesticides_data = DB::select('select * from pesticides where PesticideID='.$PesticideID);
+    		
+    		$pesticides_data = DB::select('call USP_Pesticides_update(?)',[$p_PesticideID]);
     		return view('admin/pesticidesedit')->with('pesticides_data',$pesticides_data);
 
            
@@ -92,6 +93,20 @@ class PesticidesController extends Controller
 	   	   echo $e->getmessage();
 		   return $this->respondWithError(500,"Internal Server Error!",array());
 		}
+
+    }
+    public function updtpesticides(Request $request)
+    {
+    	$p_PesticideID=$request->pesticidesID;
+    	$p_PesticideName=$request->PestName;
+    	$p_CertificationNumber=$request->certification;
+    	$p_ActiveIndegrident=$request->Indegrident;
+    	$p_RestrictedEntryInterval=$request->Interval;
+    	$p_PesticideLabelSignalWord=$request->SignalWord;
+    	$p_WPSOralNotification=$request->Notification;
+    	DB::select('call USP_Pesticides_Updatedata(?,?,?,?,?,?,?)',[$p_PesticideID,$p_PesticideName,$p_CertificationNumber,$p_ActiveIndegrident,$p_RestrictedEntryInterval,$p_PesticideLabelSignalWord,$p_WPSOralNotification]);
+    	echo "updated";
+
 
     }
 }

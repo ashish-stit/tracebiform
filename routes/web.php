@@ -23,9 +23,10 @@ Route::get('admin/addpestcides','Admin\PesticidesController@addpesticides')->nam
 Route::get('admin/pesticides','Admin\PesticidesController@pesticideslist')->name('pesticideslist');
 Route::post('admin/postpesticides','Admin\PesticidesController@postpesticides')->name('postpesticides');
 Route::get('admin/pesticideslist','Admin\PesticidesController@pesticideslist')->name('pesticideslist');
-Route::get('admin/updtpesticides','Admin\PesticidesController@editpesticides')->name('updtpesticides')
+Route::get('admin/updtpesticides','Admin\PesticidesController@editpesticides')->name('updtpesticides');
 Route::get('admin/Pesticide/delete/{p_PesticideID}','Admin\PesticidesController@pesticidesdelete')->name('pesticide');
-Route::get('admin/Pesticide/edit/{PesticideID}','Admin\PesticidesController@pesticidesedit')->name('pesticidesedit');
+Route::get('admin/Pesticide/edit/{p_PesticideID}','Admin\PesticidesController@pesticidesedit')->name('pesticidesedit');
+Route::post('admin/updtpesticides','Admin\PesticidesController@updtpesticides')->name('updtpesticides');
 Route::get('admin/addfarmfield','Admin\FarmFieldController@getform')->name('addfarmfield');
 Route::post('admin/postfarm','Admin\FarmFieldController@postfarm')->name('postfarm');
 
