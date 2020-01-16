@@ -67,7 +67,7 @@
                               class="my-3">
                             <h3 class="black_bg">
                                 <img src="{{ asset('img/logo.png') }}" alt="josh logo">
-                                <br>Log In</h3>
+                                <br>Log ffffffIn</h3>
                             <!-- CSRF Token -->
                             <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
                             <div class="form-group {{ $errors->first('email', 'has-error') }}">

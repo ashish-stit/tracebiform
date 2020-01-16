@@ -517,12 +517,7 @@
         </ul>
     </li>
     <li {!! (Request::is('admin/tasks') ? 'class="active"' : '') !!}>
-        <a href="{{ URL::to('admin/tasks') }}">
-            <i class="livicon" data-c="#EF6F6C" data-hc="#EF6F6C" data-name="list-ul" data-size="18"
-               data-loop="true"></i>
-            Tasks
-            <span class="badge badge-danger" id="taskcount">{{ Request::get('tasks_count') }}</span>
-        </a>
+        
     </li>
     <li {!! (Request::is('admin/gallery') || Request::is('admin/masonry_gallery') || Request::is('admin/imagecropping') || Request::is('admin/imgmagnifier') ? 'class="active"' : '') !!}>
         <a href="#">
@@ -578,6 +573,12 @@
                     Pesticides
                 </a>
             </li>
+             <li {!! (Request::is('admin/farmfield') ? 'class="active" id="active"' : '') !!}>
+                <a href="{{ URL::to('admin/farmfield') }}">
+                    <i class="fa fa-angle-double-right"></i>
+                    Farmfield
+                </a>
+            </li>
 
             <li {!! (Request::is('admin/users') ? 'class="active" id="active"' : '') !!}>
                 <a href="{{ URL::to('admin/users') }}">
@@ -591,12 +592,7 @@
                     Add New User
                 </a>
             </li>
-            <li {!! ((Request::is('admin/users/*')) && !(Request::is('admin/users/create')) || Request::is('admin/user_profile') ? 'class="active" id="active"' : '') !!}>
-                <a href="{{ URL::route('admin.users.show',Sentinel::getUser()->id) }}">
-                    <i class="fa fa-angle-double-right"></i>
-                    View Profile
-                </a>
-            </li>
+           
             <li {!! (Request::is('admin/deleted_users') ? 'class="active" id="active"' : '') !!}>
                 <a href="{{ URL::to('admin/deleted_users') }}">
                     <i class="fa fa-angle-double-right"></i>
@@ -734,12 +730,7 @@
             <span class="fa arrow"></span>
         </a>
         <ul class="sub-menu">
-            <li {!! (Request::is('admin/lockscreen') ? 'class="active"' : '') !!}>
-                <a href="{{ URL::route('lockscreen',Sentinel::getUser()->id) }}">
-                    <i class="fa fa-angle-double-right"></i>
-                    Lockscreen
-                </a>
-            </li>
+          
             <li {!! (Request::is('admin/invoice') ? 'class="active"' : '') !!}>
                 <a href="{{ URL::to('admin/invoice') }}">
                     <i class="fa fa-angle-double-right"></i>

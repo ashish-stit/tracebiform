@@ -31,7 +31,7 @@
                 <div id="notific">
                 @include('notifications')
                 </div>
-                <form action="{{ route('login') }}" class="omb_loginForm"  autocomplete="off" method="POST">
+                <form action="{{ url('user/login') }}" class="omb_loginForm"  autocomplete="off" method="POST">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group {{ $errors->first('email', 'has-error') }}">
                         <label class="sr-only">Email</label>
