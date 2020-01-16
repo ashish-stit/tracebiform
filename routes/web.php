@@ -11,6 +11,8 @@ include_once 'web_builder.php';
 |
 */
 Route::post('user/login', 'Admin\AuthController@USP_User_Login')->name('user');
+Route::get('admin/pti','Admin\AuthController@pti')->name('pti');
+Route::get('admin/farmfield','Admin\FarmFieldController@getform')->name('farmfield');
 
 Route::get('admin/userlist','Admin\AuthController@userlist')->name('userlist');
 Route::get('admin/user/delete/{id}','Admin\AuthController@userdeletes')->name('userdelete');
@@ -21,6 +23,7 @@ Route::get('admin/addpestcides','Admin\PesticidesController@addpesticides')->nam
 Route::get('admin/pesticides','Admin\PesticidesController@pesticideslist')->name('pesticideslist');
 Route::post('admin/postpesticides','Admin\PesticidesController@postpesticides')->name('postpesticides');
 Route::get('admin/pesticideslist','Admin\PesticidesController@pesticideslist')->name('pesticideslist');
+Route::get('admin/updtpesticides','Admin\PesticidesController@editpesticides')->name('updtpesticides')
 Route::get('admin/Pesticide/delete/{p_PesticideID}','Admin\PesticidesController@pesticidesdelete')->name('pesticide');
 Route::get('admin/Pesticide/edit/{PesticideID}','Admin\PesticidesController@pesticidesedit')->name('pesticidesedit');
 Route::get('admin/addfarmfield','Admin\FarmFieldController@getform')->name('addfarmfield');

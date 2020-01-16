@@ -52,7 +52,7 @@ Dashboard
 </div>
 <div class="card-body">
 <!-- display all errors here -->
-<form accept-charset="UTF-8" action="{{ url('admin/savepests') }}" method="post">
+<form accept-charset="UTF-8" action="{{ url('admin/updtpesticides') }}" method="post">
 {{  csrf_field()  }}
 <!-- CSRF Token -->
 <input type="hidden" name="_token" value="{{ csrf_token() }}" />

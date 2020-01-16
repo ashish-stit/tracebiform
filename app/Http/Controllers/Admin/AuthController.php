@@ -367,6 +367,9 @@ class AuthController extends JoshController
           DB::select('call USP_User_Login(?,?)',array($p_Email,$p_Password));
           return view('admin/ratings');
         } 
-
+      public function pti()
+      {
+        return view('admin/pti');
+      }
 
 }
