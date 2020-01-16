@@ -10,6 +10,19 @@ include_once 'web_builder.php';
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('admin/pests','PestsController@getpests');
+Route::post('admin/savepests','PestsController@storepests');
+Route::get('delete_pests/{PestID}','PestsController@removepests');
+Route::get('admin/edit_pests/{PestID}','PestsController@editpests');
+Route::post('admin/update_pests','PestsController@pestsupdate');
+Route::post('admin/savegrowers','Admin\GrowersController@postgrowers')->name('admin/savegrowers');
+Route::get('admin/growers','Admin\GrowersController@getgrowers')->name('admin/growers');
+Route::get('delete_growers/{SupplierID}','Admin\GrowersController@trashgrowers')->name('delete_growers');
+Route::get('admin/edit_growers/{SupplierID}','Admin\GrowersController@editgrowers')->name('admin/edit_growers');
+Route::post('admin/growersupdate','Admin\GrowersController@updategrowers');
+Route::post('admin/addmoregrowers','Admin\GrowersController@save_and_moregrowers');
+
+
 Route::get('admin/userlist','Admin\AuthController@userlist')->name('userlist');
 Route::get('admin/user/delete/{id}','Admin\AuthController@userdeletes')->name('userdelete');
 Route::get('admin/user/edit/{id}','Admin\AuthController@useredit')->name('useredit');
@@ -107,7 +120,7 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin', 'middleware' => 'admin',
 
     });
     Route::resource('users', 'UsersController');
-/************ bulk import ****************************/
+    /************ bulk import ****************************/
     Route::get('bulk_import_users', 'UsersController@import');
     Route::post('bulk_import_users', 'UsersController@importInsert');
     /****************bulk download **************************/

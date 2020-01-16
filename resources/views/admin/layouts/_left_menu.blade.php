@@ -516,11 +516,11 @@
             </li>
         </ul>
     </li>
-    <li {!! (Request::is('admin/tasks') ? 'class="active"' : '') !!}>
-        <a href="{{ URL::to('admin/tasks') }}">
+    <li {!! (Request::is('admin/pti') ? 'class="active"' : '') !!}>
+        <a href="{{ URL::to('admin/pti') }}">
             <i class="livicon" data-c="#EF6F6C" data-hc="#EF6F6C" data-name="list-ul" data-size="18"
                data-loop="true"></i>
-            Tasks
+            PTI
             <span class="badge badge-danger" id="taskcount">{{ Request::get('tasks_count') }}</span>
         </a>
     </li>
@@ -566,19 +566,6 @@
             <span class="fa arrow"></span>
         </a>
         <ul class="sub-menu">
-           <li {!! (Request::is('admin/pti') ? 'class="active" id="active"' : '') !!}>
-                <a href="{{ URL::to('admin/pti') }}">
-                    <i class="fa fa-angle-double-right"></i>
-                    PTI
-                </a>
-            </li>
-            <li {!! (Request::is('admin/pesticides') ? 'class="active" id="active"' : '') !!}>
-                <a href="{{ URL::to('admin/pesticides') }}">
-                    <i class="fa fa-angle-double-right"></i>
-                    Pesticides
-                </a>
-            </li>
-
             <li {!! (Request::is('admin/users') ? 'class="active" id="active"' : '') !!}>
                 <a href="{{ URL::to('admin/users') }}">
                     <i class="fa fa-angle-double-right"></i>
@@ -601,6 +588,18 @@
                 <a href="{{ URL::to('admin/deleted_users') }}">
                     <i class="fa fa-angle-double-right"></i>
                     Deleted Users
+                </a>
+            </li>
+            <li>
+                <a href="{{ URL::to('admin/pests') }}">
+                    <i class="fa fa-angle-double-right"></i>
+                    Pests
+                </a>
+            </li>
+            <li>
+                <a href="{{ URL::to('admin/growers') }}">
+                    <i class="fa fa-angle-double-right"></i>
+                    Growers
                 </a>
             </li>
         </ul>
@@ -764,10 +763,11 @@
                     Register
                 </a>
             </li>
+            
             <li>
                 <a href="{{ URL::to('admin/register2') }}">
                     <i class="fa fa-angle-double-right"></i>
-                    Register
+                    Register2
                 </a>
             </li>
             <li {!! (Request::is('adminar/404') ? 'class="active"' : '') !!}>
@@ -783,9 +783,9 @@
                 </a>
             </li>
             <li {!! (Request::is('admin/blank') ? 'class="active"' : '') !!}>
-                <a href="{{ URL::to('admin/userlist') }}">
+                <a href="{{ URL::to('admin/blank') }}">
                     <i class="fa fa-angle-double-right"></i>
-                    User List
+                    Blank Page
                 </a>
             </li>
         </ul>
