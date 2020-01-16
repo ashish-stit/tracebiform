@@ -82,10 +82,14 @@ class PesticidesController extends Controller
     {
     	try
     	{
+    		$pesticides_data = DB::select('select * from pesticides where PesticideID='.$PesticideID);
+    		return view('admin/pesticidesedit')->with('pesticides_data',$pesticides_data);
+
            
     	}
     	catch (\Exception $e)
 	   	 {
+	   	   echo $e->getmessage();
 		   return $this->respondWithError(500,"Internal Server Error!",array());
 		}
 

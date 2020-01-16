@@ -10,6 +10,7 @@ include_once 'web_builder.php';
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('admin/pests','PestsController@getpests');
 Route::post('admin/savepests','PestsController@storepests');
 Route::get('delete_pests/{PestID}','PestsController@removepests');
@@ -23,6 +24,11 @@ Route::post('admin/growersupdate','Admin\GrowersController@updategrowers');
 Route::post('admin/addmoregrowers','Admin\GrowersController@save_and_moregrowers');
 
 
+Route::post('user/login', 'Admin\AuthController@USP_User_Login')->name('user');
+Route::get('admin/pti','Admin\AuthController@pti')->name('pti');
+Route::get('admin/farmfield','Admin\FarmFieldController@getform')->name('farmfield');
+
+
 Route::get('admin/userlist','Admin\AuthController@userlist')->name('userlist');
 Route::get('admin/user/delete/{id}','Admin\AuthController@userdeletes')->name('userdelete');
 Route::get('admin/user/edit/{id}','Admin\AuthController@useredit')->name('useredit');
@@ -32,8 +38,11 @@ Route::get('admin/addpestcides','Admin\PesticidesController@addpesticides')->nam
 Route::get('admin/pesticides','Admin\PesticidesController@pesticideslist')->name('pesticideslist');
 Route::post('admin/postpesticides','Admin\PesticidesController@postpesticides')->name('postpesticides');
 Route::get('admin/pesticideslist','Admin\PesticidesController@pesticideslist')->name('pesticideslist');
+Route::get('admin/updtpesticides','Admin\PesticidesController@editpesticides')->name('updtpesticides')
 Route::get('admin/Pesticide/delete/{p_PesticideID}','Admin\PesticidesController@pesticidesdelete')->name('pesticide');
 Route::get('admin/Pesticide/edit/{PesticideID}','Admin\PesticidesController@pesticidesedit')->name('pesticidesedit');
+Route::get('admin/addfarmfield','Admin\FarmFieldController@getform')->name('addfarmfield');
+Route::post('admin/postfarm','Admin\FarmFieldController@postfarm')->name('postfarm');
 
 
 Route::pattern('slug', '[a-z0-9- _]+');
@@ -248,7 +257,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
 #FrontEndController
 Route::get('login', 'FrontEndController@getLogin')->name('login');
-Route::post('login', 'FrontEndController@postLogin')->name('login');
+//Route::post('login', 'Admin\AuthController@USP_User_Login')->name('login');
 Route::get('register', 'FrontEndController@getRegister')->name('register');
 Route::post('register','FrontEndController@postRegister')->name('register');
 Route::get('activate/{userId}/{activationCode}','FrontEndController@getActivate')->name('activate');

@@ -281,7 +281,7 @@ class AuthController extends JoshController
 
         try {
 // Register the user
-            $p_LoginName=$request->LoginName;
+            $p_LoginName=$request->login_name;
             $p_Password = $request->password;
             $p_UserTypeID= $request->type;
             $p_ReferenceID=$request->reference;
@@ -360,6 +360,16 @@ class AuthController extends JoshController
         }
 
         }
-
+        public function USP_User_Login(Request $request)
+        {
+          $p_Email=$request->email;
+          $p_Password=$request->password;
+          DB::select('call USP_User_Login(?,?)',array($p_Email,$p_Password));
+          return view('admin/ratings');
+        } 
+      public function pti()
+      {
+        return view('admin/pti');
+      }
 
 }
