@@ -122,7 +122,7 @@ Tasks
 
             </div>
         </div>
-        <input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" />
+        <input type="submit" value="Save" class="btn btn-primary btn-block btn-lg" />
     </div>
 </div>
 </div>

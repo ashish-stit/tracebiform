@@ -34,6 +34,9 @@ Dashboard
 </section>
 <!-- Main content -->
 <section class="content pr-3 pl-3">
+     @if(Session::has('msg'))
+    <label class="alert-danger">{{session('msg')}}</label>
+  @endif
 <div class="row">
 <div class="col-12">
 <div class="card ">
@@ -64,8 +67,9 @@ Dashboard
                 <td>{{ $pests_data->Description }}</td>
                 
                 <td>
-                <a href="{{ url('delete_pests/'.$pests_data->PestID) }}"><i class="fa fa-trash"></i></a>
-                 <a href="{{ url('admin/edit_pests/'.$pests_data->PestID) }}"><i class="fa fa-edit"></i></a>
+                
+                 <a href="{{ url('admin/edit_pests/'.$pests_data->PestID) }}" class="btn btn-primary">Edit</a>
+                 <a href="{{ url('delete_pests/'.$pests_data->PestID) }}" class="btn btn-danger">Delete</a>
                 </td>
         </tr>
         @endforeach

@@ -19,7 +19,7 @@
 @section('content')
 
     <section class="content-header">
-        <h1>Users</h1>
+        <h1>Customer list</h1>
         <ol class="breadcrumb">
             <li>
                 <a href="{{ route('admin.dashboard') }}">
@@ -27,8 +27,8 @@
                     Dashboard
                 </a>
             </li>
-            <li><a href="#"> Users</a></li>
-            <li class="active">users</li>
+            <li><a href="#"> Customer</a></li>
+            <li class="active">Customer</li>
         </ol>
     </section>
     <!-- Main content -->
@@ -43,39 +43,53 @@
                         <span>
                             <i class="livicon" data-name="users-remove" data-size="18" data-c="#ffffff"
                                data-hc="#ffffff"></i>
-                             Users List
+                             Customer List
                         </span>
+                         <a href="{{ url('admin/addcustomer') }}" class="float-right btn btn-success">
+                        <i class="fa fa-plus fa-fw"></i>Add Customer</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive-lg table-responsive-sm table-responsive-md">
                             <table class="table table-bordered" id="table">
                                 <thead>
                                 <tr class="filters">
-                                    <th>Login Name</th>
-                                    <th>UserType Name</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Title</th>
-                                    <th>E-mail</th>
+                                    <th>Company Name</th>
+                                    <th>Contact Name</th>
+                                    <th>Address</th>
+                                    <th>Contact Title</th>
+                                    <th>City</th>
+                                    <th>Region</th>
+                                    <th>Postal Code</th>
+                                    <th>Country</th>
+                                    <th>Phone</th>
+                                    <th>fax</th>
+                                    <th>Email</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($users as $user)
+                                  @foreach ($customers as $customer)
                                     <tr>
-                                        <td>{!!$user->LoginName!!}</td>
-                                        <td>{!!$user->UserTypeID!!}</td>
-                                        <td>{!! $user->FirstName !!}</td>
-                                        <td>{!! $user->LastName !!}</td>
-                                        <td>{!!$user->Title!!}</td>
-                                        <td>{!! $user->Email !!}</td>
+                                        <td>{!!$customer->CompanyName!!}</td>
+                                        <td>{!!$customer->ContactName!!}</td>
+                                        <td>{!!$customer->Address!!}</td>
+                                        <td>{!! $customer->ContactTitle !!}</td>
+                                        <td>{!!$customer->City!!}</td>
+                                        <td>{!!$customer->Region!!}</td>
+                                        <td>{!!$customer->PostalCode!!}</td>
+                                        <td>{!!$customer->Country!!}</td>
+                                        <td>{!!$customer->Phone!!}</td>
+                                        <td>{!!$customer->Fax!!}</td>
+                                        <td>{!!$customer->Email!!}</td>
+                                        
                                         <td>
-                                            <a href="{{url('/admin/user/edit/'.$user->UserID)}}" class="btn btn-primary">Edit</a>
-                                             <a href="{{url('/admin/user/delete/'.$user->UserID)}}" class="btn btn-danger">Delete</a>
+                                            <a href="{{url('/admin/customer/edit/'.$customer->CustomerID)}}" class="btn btn-primary">Edit</a>
+                                             <a href="{{url('/admin/customer/delete/'.$customer->CustomerID)}}" class="btn btn-danger">Delete</a>
+                                           
+
                                          </td>
                                     </tr>
                                 @endforeach
-
                                 </tbody>
                             </table>
                         </div>

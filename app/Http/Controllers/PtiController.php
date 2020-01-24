@@ -14,7 +14,10 @@ class PtiController extends Controller
    {
    	try
    	{
-   		$value=$request->name;
+     //     $request->growers;
+     //     $request->lot;
+     //     $request->product;
+   		// $value=$request->quantitytoprint;
        
    	}
    	catch (\Exception $e)

@@ -48,7 +48,7 @@ Register Page
             <div class="col-10 col-offset-1 mx-auto">
                 <div class="card ">
                     <div class="card-header bg-default text-center border-0 py-2">
-                        <h3>Growers</h3>
+                        <h3>Add Growers</h3>
                     </div>
                     <div class="card-body">
                         <!-- display all errors here -->
@@ -163,7 +163,7 @@ Register Page
                                      <a href="{{ URL('admin/addmoregrowers')}}" class="btn btn-primary" style="margin-left: 10px;">Save and More...</a>
 
                                      
-                                    <a href="{{ URL('admin/pests')}}" class="btn btn-primary" style="margin-left: 10px;">Cancel</a>
+                                    <a href="{{ URL('admin/growers')}}" class="btn btn-danger" style="margin-left: 10px;">Cancel</a>
                                         
                                   
                                 </div>

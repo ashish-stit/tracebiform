@@ -31,7 +31,7 @@ Register Page
 @section('content')
 <body>
     <section class="content-header">
-        <h1>Add Pestcides</h1>
+        <h1>Update Pestcides</h1>
         <ol class="breadcrumb">
             <li>
                 <a href="{{ route('admin.dashboard') }}">
@@ -40,7 +40,7 @@ Register Page
                 </a>
             </li>
             <li><a href="#">Farmfield</a></li>
-            <li class="active">Add Farmfield</li>
+            <li class="active">Update Farmfield</li>
         </ol>
     </section>
     <div class="container">
@@ -48,14 +48,16 @@ Register Page
             <div class="col-10 col-offset-1 mx-auto">
                 <div class="card ">
                     <div class="card-header bg-default text-center border-0 py-2">
-                        <h3>Add Farmfield</h3>
+                        <h3>Update Farmfield</h3>
                     </div>
                     <div class="card-body">
                         <!-- display all errors here -->
-                        <form accept-charset="UTF-8" action="{{ url('admin/postfarm') }}" method="post">
+                        <form accept-charset="UTF-8" action="{{ url('admin/updatefarmfield') }}" method="post">
                             {{  csrf_field()  }}
                             <!-- CSRF Token -->
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                           <input type="hidden" name="FarmFieldID" value="{{$data[0]->	FarmFieldID}}" />
+
 
                             <fieldset>
 								<table>
@@ -65,21 +67,21 @@ Register Page
 	                                  <div class="row">
 	                                     <label>FieldID Number:</label>
 	                                     <input class="form-control" placeholder="Pesticides Name" name="FieldIDNumber" type="text"
-	                                     value=""/>
+	                                     value="{{$data[0]->FieldIDNumber}}"/>
 	                                  </div>
-	                                </div>
+	                                </div>	
 	                                <div class="container">
 	                                  <div class="row">
 	                                     <label>Legal Description:</label>
 	                                     <input class="form-control" placeholder="Pesticides Name" name="LegalDescription" type="text"
-	                                     value=""/>
+	                                     value="{{$data[0]->LegalDescription}}"/>
 	                                  </div>
 	                                </div>
 	                                <div class="container">
 	                                  <div class="row">
 	                                     <label>Irrigation Source 2:</label>
 	                                     <input class="form-control" placeholder="Irrigation Source 2" name="IrrigationSource2" type="text"
-	                                     value=""/>
+	                                     value="{{$data[0]->IrrigationSource2}}"/>
 	                                  </div>
 	                                </div>
 	                            </td>
@@ -88,21 +90,21 @@ Register Page
 	                                  <div class="row">
 	                                     <label>Field Name</label>
 	                                     <input class="form-control" placeholder="Pesticides Name" name="FieldName" type="text"
-	                                     value=""/>
+	                                     value="{{$data[0]->FieldName}}"/>
 	                                  </div>
 	                                </div>
 	                                <div class="container">
 	                                  <div class="row">
 	                                     <label>Total Acres:</label>
 	                                     <input class="form-control" placeholder="Pesticides Name" name="TotalAcres" type="text"
-	                                     value=""/>
+	                                     value="{{$data[0]->TotalAcres}}"/>
 	                                  </div>
 	                                </div>
 	                                <div class="container">
 	                                  <div class="row">
 	                                     <label>IrrigationSource3</label>
 	                                     <input class="form-control" placeholder="Pesticides Name" name="IrrigationSource3" type="text"
-	                                     value=""/>
+	                                     value="{{$data[0]->IrrigationSource3}}"/>
 	                                  </div>
 	                                </div>
 	                            </td>
@@ -111,26 +113,25 @@ Register Page
                                      <div class="container">
 	                                  <div class="row">
                                        <lable>Select :</lable>
-                                       @foreach($formfield_data as $data)
+                                     
                                          <select name="Ounces" class="form-control">
-                                         <option value="{{$data->SupplierID}}">{{$data->CompanyName}}</option>
+                                         <option value="{{$data[0]->SupplierID}}">{{$data[0]->SupplierID}}</option>
                                          
                                         </select>
-                                        @endforeach
                                      </div>
                                      </div>
 	                                <div class="container">
 	                                  <div class="row">
 	                                     <label>Irrigation Source 1:</label>
 	                                     <input class="form-control" placeholder="Irrigation Source1" name="IrrigationSource1" type="text"
-	                                     value=""/>
+	                                     value="{{$data[0]->IrrigationSource1}}"/>
 	                                  </div>
 	                                </div>
 	                                <div class="container">
 	                                  <div class="row">
 	                                     <label>Comments:</label>
 	                                     <input class="form-control" placeholder="Comments" name="Comments" type="text"
-	                                     value=""/>
+	                                     value="{{$data[0]->Comments}}"/>
 	                                  </div>
 	                                </div>
 	                               
@@ -140,21 +141,14 @@ Register Page
 								 	<td>
 								  <div class="container" style="margin-top: 20px;">
                                      <div class="row">
-                                      <input type="submit" value="Save" class="btn btn-primary" />
+                                      <input type="submit" value="Update" class="btn btn-primary" />
                                    </div>
                                </div>
-								</td>
-								 <td>
-								  <div class="container" style="margin-top: 20px;">
-                                     <div class="row">
-                                     <a href="{{ URL('admin/addmoreform')}}" class="btn btn-primary">SaveAddMore..</a>
-                                   </div>
-                                  </div>
 								</td>
 								<td>
 								  <div class="container" style="margin-top: 20px;">
                                      <div class="row">
-                                      <a href="{{ URL('admin/frmlist')}}" class="btn btn-danger">Cancel</a>
+                                      <a href="{{ URL('admin/pests')}}" class="btn btn-danger">Cancel</a>
                                    </div>
                                  </div>
 							    </td>

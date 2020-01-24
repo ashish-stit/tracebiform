@@ -35,6 +35,9 @@ Pests List
 </section>
 <!-- Main content -->
 <section class="content pr-3 pl-3">
+     @if(Session::has('msg'))
+    <label class="alert-danger">{{session('msg')}}</label>
+  @endif
     <div class="row">
         <div class="col-12">
             <div class="card ">
@@ -53,16 +56,39 @@ Pests List
                             <table class="table table-bordered" id="table">
                                 <thead>
                                     <tr class="filters">
-                                        <th>Pesticide Name</th>
-                                        <th>Certification Number</th>
-                                        <th>Active Indegrident</th>
-                                        <th>Restricted Entry Interval</th>
-                                        <th>WPS Oral Notification</th>
-                                        <th>Actions</th>
+                                        <th>FieldIDNumber</th>
+                                        <th>FieldName</th>
+                                        <th>Supplier Name</th>
+                                        <th>LegalDescription</th>
+                                        <th>TotalAcres</th>
+                                        <th>IrrigationSource1</th>
+                                        <th>IrrigationSource2</th>
+                                        <th>IrrigationSource3</th>
+                                        <th>Comments</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                  <tbody>
-                               
+                                 @foreach ($users as $user)
+                                    <tr>
+                                        <td>{!!$user->FieldIDNumber!!}</td>
+                                        <td>{!!$user->FieldName!!}</td>
+                                        <td>{!!$user->SupplierID !!}</td>
+                                        <td>{!! $user->LegalDescription !!}</td>
+                                        <td>{!!$user->TotalAcres!!}</td>
+                                        <td>{!!$user->IrrigationSource1!!}</td>
+                                        <td>{!!$user->IrrigationSource2!!}</td>
+                                        <td>{!!$user->IrrigationSource3!!}</td>
+                                        <td>{!!$user->Comments!!}</td>
+                                        
+                                        <td>
+                                            <a href="{{url('/admin/farmfield/edit/'.$user-> FarmFieldID)}}" class="btn btn-primary">Edit</a>
+                                             <a href="{{url('/admin/farmfield/delete/'.$user->FarmFieldID)}}" class="btn btn-danger">Delete</a>
+                                           
+
+                                         </td>
+                                    </tr>
+                                @endforeach
 
                                 </tbody>
                                 

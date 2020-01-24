@@ -19,7 +19,7 @@
 @section('content')
 
     <section class="content-header">
-        <h1>Users</h1>
+        <h1>Item list</h1>
         <ol class="breadcrumb">
             <li>
                 <a href="{{ route('admin.dashboard') }}">
@@ -27,8 +27,8 @@
                     Dashboard
                 </a>
             </li>
-            <li><a href="#"> Users</a></li>
-            <li class="active">users</li>
+            <li><a href="#"> Item</a></li>
+            <li class="active">Item</li>
         </ol>
     </section>
     <!-- Main content -->
@@ -43,39 +43,46 @@
                         <span>
                             <i class="livicon" data-name="users-remove" data-size="18" data-c="#ffffff"
                                data-hc="#ffffff"></i>
-                             Users List
+                             Item List
                         </span>
+                         <a href="{{ url('product/additem') }}" class="float-right btn btn-success">
+                        <i class="fa fa-plus fa-fw"></i>Add ItemList</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive-lg table-responsive-sm table-responsive-md">
                             <table class="table table-bordered" id="table">
                                 <thead>
                                 <tr class="filters">
-                                    <th>Login Name</th>
-                                    <th>UserType Name</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Title</th>
-                                    <th>E-mail</th>
-                                    <th>Actions</th>
+                                    <th>ID</th>
+                                    <th>Product Code</th>
+                                    <th>Product Name</th>
+                                    <th>Crop/Plant Category Name</th>
+                                    <th>Quantity Per Pallet</th>
+                                    <th>Pallet Type</th>
+                                    <th>Discontinued</th>
+                                    <th>Brand</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($users as $user)
+                                 @foreach ($products as $product)
                                     <tr>
-                                        <td>{!!$user->LoginName!!}</td>
-                                        <td>{!!$user->UserTypeID!!}</td>
-                                        <td>{!! $user->FirstName !!}</td>
-                                        <td>{!! $user->LastName !!}</td>
-                                        <td>{!!$user->Title!!}</td>
-                                        <td>{!! $user->Email !!}</td>
+                                        <td>{!!$product->ProductID!!}</td>
+                                        <td>{!!$product->ProductCode!!}</td>
+                                        <td>{!!$product->ProductName!!}</td>
+                                        <td>{!!$product->CategoryName !!}</td>
+                                        <td>{!!$product->QuantityPerPallet !!}</td>
+                                        <td>{!!$product->PalletType!!}</td>
+                                        <td>{!!$product->Discontinued!!}</td>
+                                        <td>{!!$product->Brand!!}</td>
                                         <td>
-                                            <a href="{{url('/admin/user/edit/'.$user->UserID)}}" class="btn btn-primary">Edit</a>
-                                             <a href="{{url('/admin/user/delete/'.$user->UserID)}}" class="btn btn-danger">Delete</a>
+                                            <a href="{{url('/item/product/edit/'.$product->ProductID)}}" class="btn btn-primary">Edit</a>
+                                             <a href="{{url('/item/product/delete/'.$product->ProductID)}}" class="btn btn-danger">Delete</a>
+                                           
+
                                          </td>
                                     </tr>
                                 @endforeach
-
                                 </tbody>
                             </table>
                         </div>

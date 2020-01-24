@@ -5,12 +5,17 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use Session;
 
 class GrowersController extends Controller
 {
 	private function respondWithError($code, $message, $data)
 	{
 		return response()->json(array('code'=>$code,'message'=>$message,'data'=>$data));
+	}
+	public function growersform(Request $request)
+	{
+		return view('admin/addgrowers');
 	}
 
 	public function postgrowers(Request $request)
@@ -31,6 +36,7 @@ class GrowersController extends Controller
 			$p_CompanyUCCprefix=$request->CompanyUCCprefix;
 			$p_SupplierID='';
 			DB::insert('call USP_Suppliers_Insert(?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array($p_CompanyName,$p_ContactName,$p_ContactTitle,$p_Address,$p_City,$p_Region,$p_PostalCode,$p_Country,$p_Phone,$p_Fax,$p_HomePage,$p_Email,$p_CompanyUCCprefix,$p_SupplierID));
+			Session::flash('msg','Growers Added');
 			return redirect('admin/growers');
 		}
 		catch (\Exception $e)
@@ -56,6 +62,7 @@ class GrowersController extends Controller
 	{
 		try{
 			$remove_growers=DB::delete('call USP_Suppliers_Delete(?)',[$SupplierID]);
+			Session::flash('msg','Growers deleted');
 			return redirect('admin/growers');
 		}
 		catch (\Exception $e)
@@ -76,10 +83,10 @@ class GrowersController extends Controller
 			return $this->respondWithError(500,"Internal Server Error!",array());
 		}
 	}
-	public function updategrowers()
+	public function updategrowers(Request $request)
 	{
 		try{
-			//echo "kdf";die;
+			$p_SupplierID=$request->growersID;
 			$p_CompanyName=$request->CompanyName;
 			$p_ContactName=$request->ContactName;
 			$p_ContactTitle=$request->ContactTitle;
@@ -93,10 +100,9 @@ class GrowersController extends Controller
 			$p_HomePage=$request->HomePage;
 			$p_Email=$request->Email;
 			$p_CompanyUCCprefix=$request->CompanyUCCprefix;
-			$p_SupplierID='';
-			$updated_grower=DB::update('call USP_Suppliers_Update(?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array($p_CompanyName,$p_ContactName,$p_ContactTitle,$p_Address,$p_City,$p_Region,$p_PostalCode,$p_Country,$p_Phone,$p_Fax,$p_HomePage,$p_Email,$p_CompanyUCCprefix,$p_SupplierID));
-
-			return view('admin/growers');
+			$updated_grower=DB::update('call USP_Suppliers_Update(?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array($p_SupplierID,$p_CompanyName,$p_ContactName,$p_ContactTitle,$p_Address,$p_City,$p_Region,$p_PostalCode,$p_Country,$p_Phone,$p_Fax,$p_HomePage,$p_Email,$p_CompanyUCCprefix));
+            Session::flash('msg','Grower Updated');
+			return redirect('admin/growers');
 		}
 		catch (\Exception $e)
 		{

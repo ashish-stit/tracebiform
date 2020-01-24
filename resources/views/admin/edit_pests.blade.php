@@ -31,7 +31,7 @@ Register Page
 @section('content')
 <body>
 <section class="content-header">
-<h1>Add Pests User</h1>
+<h1>Update Pests User</h1>
 <ol class="breadcrumb">
 <li>
 <a href="{{ route('admin.dashboard') }}">
@@ -40,7 +40,7 @@ Dashboard
 </a>
 </li>
 <li><a href="#">Pests Users</a></li>
-<li class="active">Add Pests User</li>
+<li class="active">Update Pests User</li>
 </ol>
 </section>
 <div class="container">
@@ -48,7 +48,7 @@ Dashboard
 <div class="col-10 col-offset-1 mx-auto">
 <div class="card ">
 <div class="card-header bg-default text-center border-0 py-2">
-<h3>Pests</h3>
+<h3>Update Pests</h3>
 </div>
 <div class="card-body">
 <!-- display all errors here -->
@@ -78,9 +78,9 @@ value="{{ $pests_edit[0]->Description }}"/>
 <div class="container" style="margin-top: 20px;">
 <div class="row">
 
-<input type="submit" value="Submit" class="btn btn-primary" />
+<input type="submit" value="Update" class="btn btn-primary" />
 
-<a href="{{ URL('admin/pests')}}" class="btn btn-primary" style="margin-left: 10px;">Cancel</a>
+<a href="{{ URL('admin/pests')}}" class="btn btn-danger" style="margin-left: 10px;">Cancel</a>
 
 </div>
 </div>

@@ -579,7 +579,18 @@
                     Farmfield
                 </a>
             </li>
-
+            <li>
+                <a href="{{ URL::to('admin/growers') }}">
+                    <i class="fa fa-angle-double-right"></i>
+                    Growers
+                </a>
+            </li>
+               <li>
+                <a href="{{ URL::to('admin/pests') }}">
+                    <i class="fa fa-angle-double-right"></i>
+                    Pests
+                </a>
+            </li>
             <li {!! (Request::is('admin/users') ? 'class="active" id="active"' : '') !!}>
                 <a href="{{ URL::to('admin/users') }}">
                     <i class="fa fa-angle-double-right"></i>
@@ -601,6 +612,55 @@
             </li>
         </ul>
     </li>
+    <li {!! (Request::is('admin/users') || Request::is('admin/bulk_import_users') || Request::is('admin/users/create') || Request::is('admin/user_profile') || Request::is('admin/users/*') || Request::is('admin/deleted_users') ? 'class="active"' : '') !!}>
+        <a href="#">
+            <i class="livicon" data-name="user" data-size="18" data-c="#6CC66C" data-hc="#6CC66C"
+               data-loop="true"></i>
+            <span class="title">Purchase</span>
+            <span class="fa arrow"></span>
+        </a>
+        <ul class="sub-menu">
+           <li {!! (Request::is('admin/pti') ? 'class="active" id="active"' : '') !!}>
+                <a href="{{ URL::to('purchase/list') }}">
+                    <i class="fa fa-angle-double-right"></i>
+                    Purchase list
+                </a>
+            </li>
+        </ul>
+    </li>
+     <li {!! (Request::is('admin/users') || Request::is('admin/bulk_import_users') || Request::is('admin/users/create') || Request::is('admin/user_profile') || Request::is('admin/users/*') || Request::is('admin/deleted_users') ? 'class="active"' : '') !!}>
+        <a href="#">
+            <i class="livicon" data-name="user" data-size="18" data-c="#6CC66C" data-hc="#6CC66C"
+               data-loop="true"></i>
+            <span class="title">Customer</span>
+            <span class="fa arrow"></span>
+        </a>
+        <ul class="sub-menu">
+           <li {!! (Request::is('admin/pti') ? 'class="active" id="active"' : '') !!}>
+                <a href="{{ URL::to('customer/list') }}">
+                    <i class="fa fa-angle-double-right"></i>
+                    Customer list
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li {!! (Request::is('admin/users') || Request::is('admin/bulk_import_users') || Request::is('admin/users/create') || Request::is('admin/user_profile') || Request::is('admin/users/*') || Request::is('admin/deleted_users') ? 'class="active"' : '') !!}>
+        <a href="#">
+            <i class="livicon" data-name="user" data-size="18" data-c="#6CC66C" data-hc="#6CC66C"
+               data-loop="true"></i>
+            <span class="title">Product</span>
+            <span class="fa arrow"></span>
+        </a>
+        <ul class="sub-menu">
+           <li {!! (Request::is('admin/pti') ? 'class="active" id="active"' : '') !!}>
+                <a href="{{ URL::to('Product/Itemselllist') }}">
+                    <i class="fa fa-angle-double-right"></i>
+                    Items To Sell
+                </a>
+            </li>
+        </ul>
+    </li>
+   
     <li {!! (Request::is('admin/groups') || Request::is('admin/groups/create') || Request::is('admin/groups/*') ? 'class="active"' : '') !!}>
         <a href="#">
             <i class="livicon" data-name="users" data-size="18" data-c="#418BCA" data-hc="#418BCA"

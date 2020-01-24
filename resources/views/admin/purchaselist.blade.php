@@ -19,16 +19,16 @@
 @section('content')
 
     <section class="content-header">
-        <h1>Users</h1>
+        <h1>Purchase Order list</h1>
         <ol class="breadcrumb">
             <li>
-                <a href="{{ route('admin.dashboard') }}">
+                <a href="">
                     <i class="livicon" data-name="home" data-size="14" data-color="#000"></i>
                     Dashboard
                 </a>
             </li>
-            <li><a href="#"> Users</a></li>
-            <li class="active">users</li>
+            <li><a href="#"> Purchase Order</a></li>
+            <li class="active">Purchase Order</li>
         </ol>
     </section>
     <!-- Main content -->
@@ -43,39 +43,47 @@
                         <span>
                             <i class="livicon" data-name="users-remove" data-size="18" data-c="#ffffff"
                                data-hc="#ffffff"></i>
-                             Users List
+                             Purchase Order List
                         </span>
+                         <a href="{{ url('Purchase/orderadd') }}" class="float-right btn btn-success">
+                        <i class="fa fa-plus fa-fw"></i>Add Purchase Order</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive-lg table-responsive-sm table-responsive-md">
                             <table class="table table-bordered" id="table">
                                 <thead>
                                 <tr class="filters">
-                                    <th>Login Name</th>
-                                    <th>UserType Name</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Title</th>
-                                    <th>E-mail</th>
-                                    <th>Actions</th>
+                                    <th>Load Number</th>
+                                    <th>Purchase Order Number</th>
+                                    <th>Customer Name</th>
+                                    <th>Ship To</th>
+                                    <th>Ship To Po No</th>
+                                    <th>Order Date</th>
+                                    <th>Date Required</th>
+                                    <th>Scheduling Shipping Date</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($users as $user)
-                                    <tr>
-                                        <td>{!!$user->LoginName!!}</td>
-                                        <td>{!!$user->UserTypeID!!}</td>
-                                        <td>{!! $user->FirstName !!}</td>
-                                        <td>{!! $user->LastName !!}</td>
-                                        <td>{!!$user->Title!!}</td>
-                                        <td>{!! $user->Email !!}</td>
-                                        <td>
-                                            <a href="{{url('/admin/user/edit/'.$user->UserID)}}" class="btn btn-primary">Edit</a>
-                                             <a href="{{url('/admin/user/delete/'.$user->UserID)}}" class="btn btn-danger">Delete</a>
-                                         </td>
+                                     @foreach($order_data as $ord_data)
+                                      <tr>
+                                            <td>{{ $ord_data->LoadNumber }}</td>
+                                            <td>{{ $ord_data->PurchaseOrderNumber }}</td>
+                                            <td>{{ $ord_data->CustomerID }}</td>
+                                            <td>{{ $ord_data->ShipToID }}</td>
+                                            <td>{{ $ord_data->ShipToPONumber }}</td>
+                                            <td>{{ $ord_data->OrderDate }}</td>
+                                            <td>{{ $ord_data->DateRequired }}</td>
+                                            <td>{{ $ord_data->ShipDate }}</td>
+                                            
+                                            <td>
+                                            
+                                             <a href="{{ url('admin/edit_ord/'.$ord_data->PurchaseOrderID) }}" class="btn btn-primary">Edit</a>
+                                             <a href="{{ url('delete_ord/'.$ord_data->PurchaseOrderID) }}" class="btn btn-danger">Delete</a>
+                                            </td>
                                     </tr>
-                                @endforeach
-
+                                    @endforeach
+                                                            
                                 </tbody>
                             </table>
                         </div>

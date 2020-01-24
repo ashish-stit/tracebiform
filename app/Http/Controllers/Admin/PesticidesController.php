@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+Use Session;
 
 class PesticidesController extends Controller
 {
@@ -46,7 +47,9 @@ class PesticidesController extends Controller
 	        $p_SprayRig=$request->sprayrig;
 	        $p_PesticideID='';
 	        DB::insert('call USP_Pesticides_Insert(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array($p_PesticideName,$p_RatesListedPer,$p_RestrictedUseData,$p_ProductRate,$p_ApplicatorName,$p_GPA,$p_NozzelSetup,$p_PesticideLabelSignalWord,$p_EPARegistrationNumber,$p_ProductMeasurementTypeID,$p_CertificationNumber,$p_Concentration,$p_SprayingInstructions,$p_RestrictedEntryLevelData,$p_WPSOralNotification,$p_Speed,$p_MPH,$p_Formulation,$p_ActiveIndegrident,$p_TotalProductConsumed,$p_ratelisted,$p_SprayRig,$p_PesticideID));
-	         return redirect("admin/pesticideslist")->with('success', trans('auth/message.signup.success'));
+
+	        Session::flash('msg','Pesticides Saved');
+             return redirect('admin/pesticideslist');
 	         }
 	   	catch (\Exception $e)
 	   	 {
@@ -70,7 +73,8 @@ class PesticidesController extends Controller
     	try
     	{
     	   $users=DB::delete('call USP_Pesticides_Delete(?)',[$p_PesticideID]);
-            return redirect('admin/pesticideslist');
+    	    Session::flash('msg','Pesticides deleted');
+          return redirect('admin/pesticideslist');
 
     	}
     	catch (\Exception $e)
@@ -99,13 +103,14 @@ class PesticidesController extends Controller
     {
     	$p_PesticideID=$request->pesticidesID;
     	$p_PesticideName=$request->PestName;
-    	$p_CertificationNumber=$request->certification;
+    	$p_PesticideLabelSignalWord=$request->SignalWord;
+        $p_WPSOralNotification=$request->Notification;
     	$p_ActiveIndegrident=$request->Indegrident;
     	$p_RestrictedEntryInterval=$request->Interval;
-    	$p_PesticideLabelSignalWord=$request->SignalWord;
-    	$p_WPSOralNotification=$request->Notification;
-    	DB::select('call USP_Pesticides_Updatedata(?,?,?,?,?,?,?)',[$p_PesticideID,$p_PesticideName,$p_CertificationNumber,$p_ActiveIndegrident,$p_RestrictedEntryInterval,$p_PesticideLabelSignalWord,$p_WPSOralNotification]);
-    	echo "updated";
+    	$p_CertificationNumber=$request->certification;
+    	DB::update('call USP_Pesticides_Updatedata(?,?,?,?,?,?,?)',[$p_PesticideID,$p_PesticideName,$p_PesticideLabelSignalWord,$p_WPSOralNotification,$p_ActiveIndegrident,$p_RestrictedEntryInterval,$p_CertificationNumber]);
+    	 Session::flash('msg','Pesticides updated');
+          return redirect('admin/pesticideslist');
 
 
     }

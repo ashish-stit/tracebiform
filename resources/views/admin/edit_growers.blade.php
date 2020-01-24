@@ -31,7 +31,7 @@ Register Page
 @section('content')
 <body>
     <section class="content-header">
-        <h1>Add Growers User</h1>
+        <h1>Update Growers User</h1>
         <ol class="breadcrumb">
             <li>
                 <a href="{{ route('admin.dashboard') }}">
@@ -40,7 +40,7 @@ Register Page
                 </a>
             </li>
             <li><a href="#">Growers</a></li>
-            <li class="active">Add Growers User</li>
+            <li class="active">Update Growers User</li>
         </ol>
     </section>
     <div class="container">
@@ -48,7 +48,7 @@ Register Page
             <div class="col-10 col-offset-1 mx-auto">
                 <div class="card ">
                     <div class="card-header bg-default text-center border-0 py-2">
-                        <h3>Growers</h3>
+                        <h3>Update Growers</h3>
                     </div>
                     <div class="card-body">
                         <!-- display all errors here -->
@@ -60,7 +60,7 @@ Register Page
                             <fieldset>
 
                              <div class="container">
-                                <input type="hidden" name="_token" value="{{ $growers_edit[0]->SupplierID }}" />
+                                <input type="hidden" name="growersID" value="{{ $growers_edit[0]->SupplierID }}" />
                                  <div class="row">
                                      <label>Company Name:</label>
                                      <input class="form-control" placeholder="Company Name" name="CompanyName" type="text"
@@ -159,9 +159,9 @@ Register Page
                              <div class="container" style="margin-top: 20px;">
                                  <div class="row">
 
-                                    <input type="submit" value="Submit" class="btn btn-primary" />
+                                    <input type="submit" value="Update" class="btn btn-primary" />
 
-                                    <a href="{{ URL('admin/growers')}}" class="btn btn-primary" style="margin-left: 10px;">Cancel</a>
+                                    <a href="{{ URL('admin/growers')}}" class="btn btn-danger" style="margin-left: 10px;">Cancel</a>
                                     
                                   
                                 </div>

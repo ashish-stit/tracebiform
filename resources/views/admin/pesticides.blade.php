@@ -35,6 +35,9 @@ Pests List
 </section>
 <!-- Main content -->
 <section class="content pr-3 pl-3">
+     @if(Session::has('msg'))
+    <label class="alert-danger">{{session('msg')}}</label>
+  @endif
     <div class="row">
         <div class="col-12">
             <div class="card ">

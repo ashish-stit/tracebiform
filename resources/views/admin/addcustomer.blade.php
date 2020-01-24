@@ -52,7 +52,7 @@ Register Page
                     </div>
                     <div class="card-body">
                         <!-- display all errors here -->
-                        <form accept-charset="UTF-8" action="{{ url('admin/postfarm') }}" method="post">
+                        <form accept-charset="UTF-8" action="{{ url('admin/addcustomer') }}" method="post">
                             {{  csrf_field()  }}
                             <!-- CSRF Token -->
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -63,22 +63,36 @@ Register Page
 								  	<td>
 									<div class="container">
 	                                  <div class="row">
-	                                     <label>FieldID Number:</label>
-	                                     <input class="form-control" placeholder="Pesticides Name" name="FieldIDNumber" type="text"
+	                                     <label>Customer Code:</label>
+	                                     <input class="form-control" placeholder="Customer Code" name="customercode" type="text"
 	                                     value=""/>
 	                                  </div>
 	                                </div>
 	                                <div class="container">
 	                                  <div class="row">
-	                                     <label>Legal Description:</label>
-	                                     <input class="form-control" placeholder="Pesticides Name" name="LegalDescription" type="text"
+	                                     <label>Conatact Title:</label>
+	                                     <input class="form-control" placeholder="Conatct Title" name="contacttitle" type="text"
 	                                     value=""/>
 	                                  </div>
 	                                </div>
 	                                <div class="container">
 	                                  <div class="row">
-	                                     <label>Irrigation Source 2:</label>
-	                                     <input class="form-control" placeholder="Irrigation Source 2" name="IrrigationSource2" type="text"
+	                                     <label>City:</label>
+	                                     <input class="form-control" placeholder="City" name="city" type="text"
+	                                     value=""/>
+	                                  </div>
+	                                </div>
+	                                <div class="container">
+	                                  <div class="row">
+	                                     <label>Country:</label>
+	                                     <input class="form-control" placeholder="Country" name="country" type="text"
+	                                     value=""/>
+	                                  </div>
+	                                </div>
+	                                 <div class="container">
+	                                  <div class="row">
+	                                     <label>Email:</label>
+	                                     <input class="form-control" placeholder="Email" name="email" type="text"
 	                                     value=""/>
 	                                  </div>
 	                                </div>
@@ -86,50 +100,66 @@ Register Page
 	                            <td>
 									<div class="container">
 	                                  <div class="row">
-	                                     <label>Field Name</label>
-	                                     <input class="form-control" placeholder="Pesticides Name" name="FieldName" type="text"
+	                                     <label>Company Name</label>
+	                                     <input class="form-control" placeholder="Company Name" name="companyname" type="text"
 	                                     value=""/>
 	                                  </div>
 	                                </div>
 	                                <div class="container">
 	                                  <div class="row">
-	                                     <label>Total Acres:</label>
-	                                     <input class="form-control" placeholder="Pesticides Name" name="TotalAcres" type="text"
+	                                     <label>Address:</label>
+	                                     <input class="form-control" placeholder="Address" name="address" type="text"
 	                                     value=""/>
 	                                  </div>
 	                                </div>
 	                                <div class="container">
 	                                  <div class="row">
-	                                     <label>IrrigationSource3</label>
-	                                     <input class="form-control" placeholder="Pesticides Name" name="IrrigationSource3" type="text"
+	                                     <label>State</label>
+	                                     <input class="form-control" placeholder="State" name="state" type="text"
+	                                     value=""/>
+	                                  </div>
+	                                </div>
+	                                <div class="container">
+	                                  <div class="row">
+	                                     <label>Phone:</label>
+	                                     <input class="form-control" placeholder="Phone" name="phone" type="text"
+	                                     value=""/>
+	                                  </div>
+	                                </div>
+	                                <div class="container">
+	                                  <div class="row">
+	                                     <label>Create date:</label>
+	                                     <input class="form-control" placeholder="Create date" name="date" type="text"
 	                                     value=""/>
 	                                  </div>
 	                                </div>
 	                            </td>
 	                             <td>
-
-                                     <div class="container">
-	                                  <div class="row">
-                                       <lable>Select :</lable>
-                                       @foreach($formfield_data as $data)
-                                         <select name="Ounces" class="form-control">
-                                         <option value="{{$data->SupplierID}}">{{$data->CompanyName}}</option>
-                                         
-                                        </select>
-                                        @endforeach
-                                     </div>
-                                     </div>
 	                                <div class="container">
 	                                  <div class="row">
-	                                     <label>Irrigation Source 1:</label>
-	                                     <input class="form-control" placeholder="Irrigation Source1" name="IrrigationSource1" type="text"
+	                                     <label>Contact Name:</label>
+	                                     <input class="form-control" placeholder="Contact Name" name="contactname" type="text"
 	                                     value=""/>
 	                                  </div>
 	                                </div>
 	                                <div class="container">
 	                                  <div class="row">
-	                                     <label>Comments:</label>
-	                                     <input class="form-control" placeholder="Comments" name="Comments" type="text"
+	                                     <label>Address 2:</label>
+	                                     <input class="form-control" placeholder="Address 2" name="address2" type="text"
+	                                     value=""/>
+	                                  </div>
+	                                </div>
+	                                 <div class="container">
+	                                  <div class="row">
+	                                     <label>Postal Code:</label>
+	                                     <input class="form-control" placeholder="Postal Code" name="postalcode" type="text"
+	                                     value=""/>
+	                                  </div>
+	                                </div>
+	                                 <div class="container">
+	                                  <div class="row">
+	                                     <label>Fax:</label>
+	                                     <input class="form-control" placeholder="Fax" name="fax" type="text"
 	                                     value=""/>
 	                                  </div>
 	                                </div>

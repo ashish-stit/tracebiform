@@ -11,10 +11,12 @@ include_once 'web_builder.php';
 |
 */
 
-Route::get('admin/pests','PestsController@getpests');
+Route::get('admin/pests','PestsController@getpests')->name('pets');
+Route::get('admin/addpest','PestsController@addform')->name('addpest');
+Route::get('admin/addgrowers','Admin\GrowersController@growersform')->name('addgrowers');
 Route::post('admin/savepests','PestsController@storepests');
 Route::get('delete_pests/{PestID}','PestsController@removepests');
-Route::get('admin/edit_pests/{PestID}','PestsController@editpests');
+Route::get('admin/edit_pests/{PestID}','PestsController@editpests')->name('edit_pests');
 Route::post('admin/update_pests','PestsController@pestsupdate');
 Route::post('admin/savegrowers','Admin\GrowersController@postgrowers')->name('admin/savegrowers');
 Route::get('admin/growers','Admin\GrowersController@getgrowers')->name('admin/growers');
@@ -22,17 +24,21 @@ Route::get('delete_growers/{SupplierID}','Admin\GrowersController@trashgrowers')
 Route::get('admin/edit_growers/{SupplierID}','Admin\GrowersController@editgrowers')->name('admin/edit_growers');
 Route::post('admin/growersupdate','Admin\GrowersController@updategrowers');
 Route::post('admin/addmoregrowers','Admin\GrowersController@save_and_moregrowers');
-
+Route::post('admin/register','Admin\AuthController@postRegister2')->name('adminregis');
 
 Route::post('user/login', 'Admin\AuthController@USP_User_Login')->name('user');
 Route::get('admin/pti','Admin\AuthController@pti')->name('pti');
 Route::get('admin/farmfield','Admin\FarmFieldController@getform')->name('farmfield');
-
+Route::get('admin/frmlist','Admin\FarmFieldController@farmlist')->name('frmlist');
+Route::get('admin/farmfield/delete/{p_FarmFieldID}','Admin\FarmFieldController@farmfielddelete')->name('farmdelete');
+Route::post('admin/addmoreform','Admin\FarmFieldController@addmoreform')->name('addmoreform');
+Route::get('admin/farmfield/edit/{FarmFieldID}','Admin\FarmFieldController@editFarmFieldID')->name('FarmFieldID');
+Route::post('admin/updatefarmfield','Admin\FarmFieldController@updatefarmfield')->name('updatefarmfield');
 
 Route::get('admin/userlist','Admin\AuthController@userlist')->name('userlist');
 Route::get('admin/user/delete/{id}','Admin\AuthController@userdeletes')->name('userdelete');
 Route::get('admin/user/edit/{id}','Admin\AuthController@useredit')->name('useredit');
-Route::post('admin/userupdate','Admin\AuthController@userupdate');
+Route::post('admin/userupdate','Admin\AuthController@userupdate')->name('userupdate');
 Route::post('admin/postpti','PtiController@addpost')->name('postpti');
 Route::get('admin/addpestcides','Admin\PesticidesController@addpesticides')->name('pesticides');
 Route::get('admin/pesticides','Admin\PesticidesController@pesticideslist')->name('pesticideslist');
@@ -44,7 +50,23 @@ Route::get('admin/Pesticide/edit/{p_PesticideID}','Admin\PesticidesController@pe
 Route::post('admin/updtpesticides','Admin\PesticidesController@updtpesticides')->name('updtpesticides');
 Route::get('admin/addfarmfield','Admin\FarmFieldController@getform')->name('addfarmfield');
 Route::post('admin/postfarm','Admin\FarmFieldController@postfarm')->name('postfarm');
+Route::get('admin/addcustomer','Admin\CustommerController@addform')->name('addcustomer');
+Route::post('admin/addcustomer','Admin\CustommerController@addcustomer')->name('postcustomer');
 
+Route::get('customer/list','Admin\CustommerController@getdata')->name('customerlist');
+Route::get('admin/customer/delete/{p_CustomerID}','Admin\CustommerController@deletedata')->name('delete');
+Route::get('admin/customer/edit/{p_CustomerID}','Admin\CustommerController@editdata')->name('edit');
+Route::post('admin/updatecustomer', 'Admin\CustommerController@Customerupdatedata')->name('updatecust');
+Route::get('Product/Itemselllist','Admin\ItemController@Itemlist')->name('Itemselllist');
+Route::get('product/additem','Admin\ItemController@addItem')->name('additem');
+Route::post('product/saveitem','Admin\ItemController@savedata')->name('saveitem');
+Route::get('item/product/delete/{p_ProductID}','Admin\ItemController@productdelete')->name('productdelete');
+Route::get('item/product/edit/{p_ProductID}','Admin\ItemController@productedit')->name('productedit');
+Route::post('product/update','Admin\ItemController@productupdate')->name('productupdate');
+Route::get('purchase/list','Admin\PurchaseController@getform')->name('purchaselist');
+Route::get('Purchase/orderadd','Admin\PurchaseController@showform')->name('purchaseord');
+Route::post('admin/addorder','Admin\PurchaseController@addorder')->name('addorder');
+Route::get('delete_ord/{PurchaseOrderID}','Admin\PurchaseController@orderdelete')->name('orddelete');
 
 Route::pattern('slug', '[a-z0-9- _]+');
 

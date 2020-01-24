@@ -16,6 +16,7 @@ use URL;
 use DB;
 use Validator;
 use View;
+use Session;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\ForgotRequest;
@@ -277,9 +278,10 @@ class AuthController extends JoshController
      * @return Redirect
      */
     public function postRegister2(UserRequest $request)
-    {
+   {
 
         try {
+
 // Register the user
             $p_LoginName=$request->login_name;
             $p_Password = $request->password;
@@ -296,7 +298,6 @@ class AuthController extends JoshController
             $p_City=$request->city;
             $p_Region=$request->Region;
             $p_PostalCode=$request->PostalCode;
-
             $p_Country=$request->country;
             $p_HomePhone=$request->HomePhone;
             $p_Extension=$request->Extension;
@@ -304,13 +305,12 @@ class AuthController extends JoshController
             $p_Notes=$request->Notes;
             $p_ReportsTo= $request->ReportsTo;
             $p_Email = $request->email;
-            $p_Active='1';
-
+            $p_Active=$request->Active;
             $p_UserID='';
 
             DB::insert('call USP_Users_Insert(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array($p_LoginName,$p_Password,$p_UserTypeID,$p_ReferenceID,$p_SecurityLevelID,$p_LastName,$p_FirstName,$p_Title,$p_TitleOfCourtesy,$p_BirthDate,$p_HireDate,$p_Address,$p_City,$p_Region,$p_PostalCode,$p_Country,$p_HomePhone,$p_Extension,$p_Photo,$p_Notes,$p_ReportsTo,$p_Email,$p_Active,$p_UserID));
-
-            return Redirect::route("admin.dashboard")->with('success', trans('auth/message.signup.success'));
+              Session::flash('msg','User Added');
+              return redirect('admin/userlist');
 
         } catch (UserExistsException $e) {
             echo $e->messageBag();
@@ -331,27 +331,30 @@ class AuthController extends JoshController
         {
 
             $users=DB::delete('call USP_Users_Delete(?)',[$id]);
+            Session::flash('msg','User Profile Deleted');
             return redirect('admin/userlist');
         }
         public function useredit($id)
         {
-             $users=DB::select('call USP_Users_Getdata(?)',[$id]);
-             $data=user::where('id',$id)->first();
-             return view('admin/userupdate')->with('users',$data);
+             $users_data=DB::select('call USP_Users_GetSingle(?)',[$id]);
+             return view('admin/userupdate')->with('users',$users_data);
         }
         public function userupdate(Request $request)
         {
             try{
-            $P_id=$request->userID;
-            $P_LoginName=$request->login_name;
-            $P_FirstName=$request->first_name;
-            $P_LastName=$request->last_name;
-            $P_Email=$request->email;
-            $P_Title=$request->title;
-            $P_City=$request->city;
-            $P_Region=$request->region;
-           DB::table('call USP_Users_Update(?,?,?,?,?,?,?,?)',array($P_LoginName,$P_FirstName,$P_LastName,$P_Email,$P_Title,$P_City,$P_Region,$P_id));
-                return redirect('admin/userlist');
+            $p_UserID=$request->userID;
+            $p_LoginName=$request->LoginName;
+            $p_LastName=$request->LastName;
+            $p_FirstName=$request->FirstName;
+             $p_Title=$request->Title;
+            $p_City=$request->City;
+            $p_Email=$request->Email;
+           
+            
+           DB::update('call USP_Users_Update(?,?,?,?,?,?,?)',array($p_UserID,$p_LoginName,$p_LastName,$p_FirstName,$p_Title,$p_City,$p_Email));
+              Session::flash('msg','User Profile Updated');
+               return redirect('admin/userlist');
+        
             }
             catch (\Exception $e)
          {

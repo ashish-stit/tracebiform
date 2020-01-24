@@ -31,6 +31,7 @@ Register Page
 @section('content')
 <body>
     <section class="content-header">
+        
         <h1>Add Pests User</h1>
         <ol class="breadcrumb">
             <li>
