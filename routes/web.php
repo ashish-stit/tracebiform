@@ -67,6 +67,36 @@ Route::get('purchase/list','Admin\PurchaseController@getform')->name('purchaseli
 Route::get('Purchase/orderadd','Admin\PurchaseController@showform')->name('purchaseord');
 Route::post('admin/addorder','Admin\PurchaseController@addorder')->name('addorder');
 Route::get('delete_ord/{PurchaseOrderID}','Admin\PurchaseController@orderdelete')->name('orddelete');
+Route::get('admin/edit_ord/{PurchaseOrderID}','Admin\PurchaseController@editorder')->name('editord');
+Route::post('admin/updateorder','Admin\PurchaseController@updateorder')->name('updateorder');
+Route::get('wharehouse/single','Admin\WharehouseController@showform')->name('single');
+ Route::get('admin/singlelist','Admin\WharehouseController@singlelist')->name('singlelist');
+Route::post('getquantitydata',"Admin\WharehouseController@getid")->name('getquantitydata');
+Route::post('admin/singlesave',"Admin\WharehouseController@savedata")->name('singlesave');
+Route::get('admin/single/edit/{InventoryTransactionID}',"Admin\WharehouseController@editdata")->name('singleedit');
+Route::get('admin/single/delete/{InventoryTransactionID}',"Admin\WharehouseController@deletedata")->name('singledelete');
+Route::post('updateinventry', 'Admin\WharehouseController@updateinvtrans')->name('updateinventry');
+
+Route::get('NewPlantApplication/form',"Admin\NewPlantApplication@getform")->name('NewPlantApplication');
+Route::post('applicationdata',"Admin\NewPlantApplication@application")->name('applicationdata');
+Route::post('getpetsdata',"Admin\NewPlantApplication@getpetsdata")->name('getpetsdata');
+Route::post('admin/saveapplication','Admin\NewPlantApplication@saveformdata')->name('saveapplication');
+Route::get('admin/newplantapplicationlist', 'Admin\NewPlantApplication@newapplist')->name('admin/newplantapplicationlist');
+Route::get('deletenewplantapp/{FarmFieldApplicationID}', 'Admin\NewPlantApplication@removenewapp')->name('deletenewplantapp');
+Route::get('admin/edit_newplantapp/{FarmFieldApplicationID}', 'Admin\NewPlantApplication@editplantnewapps')->name('admin/edit_newplantapp');
+Route::post('upadtenewapps', 'Admin\NewPlantApplication@updatenewapplications')->name('upadtenewapps');
+
+
+
+Route::get('admin/billsoflading','Admin\BillingController@showform')->name('billsoflading');
+Route::post('getorderid','Admin\BillingController@getorderid')->name('getorderid');
+Route::post('inventoryid','Admin\BillingController@inventoryid')->name('inventoryid');
+Route::get('admin/billsofladinglist', 'Admin\BillingController@getbillingdata')->name('billsofladinglist');
+Route::post('insertbillslading', 'Admin\BillingController@savebillslading')->name('insertbillslading');
+Route::get('deletebillslading/{BillofLadingID}', 'Admin\BillingController@removebillslading')->name('deletebillslading');
+Route::get('editbilling/{BillofLadingID}', 'Admin\BillingController@billedit')->name('editbilling');
+Route::post('updatebillslading', 'Admin\BillingController@updlading')->name('updatebillslading');
+
 
 Route::pattern('slug', '[a-z0-9- _]+');
 

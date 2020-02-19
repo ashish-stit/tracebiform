@@ -38,17 +38,20 @@ Register Page
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-   $(document).ready(function() {
-      var max_fields = 100;
-      var wrapper = $(".cont");
-      var add_button = $(".add_form");
+  $(document).ready(function() {
+    	var s = $("#rows").val();
+        var max_fields = 100;
+    	var wrapper = $(".cont");
+    	var add_button = $(".add_form");
 
-      var x = 1;
-      $(add_button).click(function(e) {
-         e.preventDefault();
-         if (x < max_fields) {
-               x++;
-              $(wrapper).append('<div><div class="row"><div class="col-xs-12 col-sm-2 col-md-2"><label>Product Code:</label><select  class="form-control" name="productcode[]">@foreach($Products_data as $data)<option value="{{$data->ProductID}}">{{$data->ProductCode}}</option>@endforeach </select></div>  <div class="col-xs-12 col-sm-2 col-md-2"> <label>Product Name:</label> <select  class="form-control" name="productname[]">	@foreach($Products_data as $data)<option value="{{$data->ProductID}}">{{$data->ProductName}}</option>@endforeach  </select></div> <div  class="col-xs-12 col-sm-1 col-md-1"><label>Brand:</label><input type="text" name="brand[]"></div> <div  class="col-xs-12 col-sm-2 col-md-2"><label>Unit Price:</label><input type="text" name="unitprice[]"></div><div  class="col-xs-12 col-sm-1 col-md-1"><label>Quantity:</label> <input type="text" name="quantity[]"></div><div  class="col-xs-12 col-sm-2 col-md-2"><label>Pallet Type:</label> <input type="text" name="pallettype[]"></div><a href="#"  class="delete">Remove</a></div></div>'); 
+    	var x = Number(s);
+        
+        
+    	$(add_button).click(function(e) {
+        	e.preventDefault();
+        	if (x < max_fields) {
+            	x++;
+              $(wrapper).append('<div><div class="row"><div  class="col-xs-12 col-sm-2 col-md-2"><label>Brand:</label><input type="text" name="brand[]"></div> <div  class="col-xs-12 col-sm-2 col-md-2"><label>Unit Price:</label><input type="text" name="unitprice[]"></div><div  class="col-xs-12 col-sm-2 col-md-2"><label>Quantity:</label> <input type="text" name="quantity[]"></div><div  class="col-xs-12 col-sm-2 col-md-2"><label>Pallet Type:</label> <input type="text" name="pallettype[]"></div><div class="col-xs-12 col-sm-2 col-md-2"><label>Product Code:</label><select  class="form-control" name="productcode[]">@foreach($Products_data as $data)<option value="{{$data->ProductID}}">{{$data->ProductCode}}</option>@endforeach </select></div>  <div class="col-xs-12 col-sm-1 col-md-1"> <label>Product Name:</label>    <select  class="form-control" name="productname[]">	@foreach($Products_data as $data)<option value="{{$data->ProductID}}">{{$data->ProductName}}</option>@endforeach  </select></div><a href="#"  class="delete">Remove</a></div></div>'); 
          } else {
                alert('You Reached the limits')
          }
@@ -89,11 +92,15 @@ Register Page
                     </div>
                     <div class="card-body">
                         <!-- display all errors here -->
-                        <form accept-charset="UTF-8" action="{{ url('admin/addorder') }}" method="post">
+                        <form accept-charset="UTF-8" action="{{ url('admin/updateorder') }}" method="post">
                             {{  csrf_field()  }}
                             <!-- CSRF Token -->
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-
+                            <input type="hidden" name="PurchaseOrderID" value="{{$editorder[0]->PurchaseOrderID}}" />
+                                @foreach($purchase_data as $data)
+                                   <input type="hidden" name="PurchasemultipleID[]" value="{{$data->PurchaseOrderID}}" />
+                                   <input type="hidden" name="PurchasedetailID[]" value="{{$data->PurchaseOrderDetailID}}" />
+                                   @endforeach
                             <fieldset>
 								<table>
 								 
@@ -102,22 +109,22 @@ Register Page
 	                                  	<div class="col-xs-12 col-sm-6 col-md-6">
 		                                     <label>Purchase Order No:</label>
 		                                     <input class="form-control" placeholder="Customer Code" name="purchaseordernumber" type="text"
-		                                     value=""/>
+		                                     value="{{$editorder[0]->PurchaseOrderNumber}}"/>
 	                                     </div>
 	                                     <div class="col-xs-12 col-sm-6 col-md-6">
 		                                     <label>Load Number:</label>
 		                                     <input class="form-control" placeholder="Conatct Title" name="loadnumber" type="text"
-		                                     value=""/>
+		                                     value="{{$editorder[0]->CustomerID}}"/>
 	                                     </div>
 	                                     <div class="col-xs-12 col-sm-6 col-md-6">
 		                                     <label>Date Promised:</label>
-		                                     <input class="form-control" placeholder="City" name="datepromised" type="date"
-		                                     value=""/>
+		                                      <input class="form-control" placeholder="City" name="datepromised" type="date"
+		                                     value="{{$editorder[0]->DatePromised}}"/>
 	                                     </div>
 	                                     <div class="col-xs-12 col-sm-6 col-md-6">
 		                                     <label>Supplier:</label>
 		                                     <input class="form-control" placeholder="Country" name="supply" type="text"
-		                                     value=""/>
+		                                     value="{{$editorder[0]->PurchaseOrderDescription}}"/>
 	                                     </div>
 	                                     <div class="col-xs-12 col-sm-12 col-md-12">
 		                                     <label>Suppliers:</label>
@@ -134,22 +141,22 @@ Register Page
 	                                     <div class="col-xs-12 col-sm-6 col-md-6">
 		                                     <label>Order Date:</label>
 		                                     <input class="form-control" placeholder="Company Name" name="orderdate" type="date"
-		                                     value=""/>
+		                                     value="{{$editorder[0]->OrderDate}}"/>
 	                                     </div>
 	                                     <div class="col-xs-12 col-sm-6 col-md-6">
 		                                     <label>Date Required:</label>
 		                                     <input class="form-control" placeholder="Address" name="daterequired" type="date"
-		                                     value=""/>
+		                                     value="{{$editorder[0]->DateRequired}}"/>
 	                                     </div>
 	                                     <div class="col-xs-12 col-sm-6 col-md-6">
 	                                     	 <label>Ship Date:</label>
 		                                     <input class="form-control" placeholder="State" name="shipdate" type="date"
-		                                     value=""/>
+		                                     value="{{$editorder[0]->ShipDate}}"/>
 	                                     </div>
 	                                     <div class="col-xs-12 col-sm-6 col-md-6">
 		                                     <label>LoadAt:</label>
 		                                     <input class="form-control" placeholder="Phone" name="loadat" type="text"
-		                                     value=""/>
+		                                     value="{{$editorder[0]->LoadAt}}"/>
 	                                     </div>
 	                                     <div class="col-xs-12 col-sm-12 col-md-12">
 		                                     <label>Customer:</label>
@@ -191,35 +198,35 @@ Register Page
 
 							            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
 							            	<div class="row">
-							               <div class="col-xs-12 col-sm-6 col-md-6">
+							              <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Invoice To Address:</label>
 									         <input class="form-control" placeholder="Phone" name="invoicetoaddress" type="text"
-									                                     value=""/>
+									          value="{{$editorder[0]->Address}}"/>
 								           </div>
 								           <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Invoice To City:</label>
 									         <input class="form-control" placeholder="Phone" name="invoicetocity" type="text"
-									                                     value=""/>
+									          value="{{$editorder[0]->City}}"/>
 								           </div>
 								           <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Invoice To Region:</label>
 									         <input class="form-control" placeholder="Phone" name="invoicetoregion" type="text"
-									                                     value=""/>
+									           value="{{$editorder[0]->Region}}"/>
 								           </div>
 								           <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Invoice To Zip:</label>
 									         <input class="form-control" placeholder="Phone" name="invoicetozip" type="text"
-									                                     value=""/>
+									           value="{{$editorder[0]->Zip}}"/>
 								           </div>
 								           <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Invoice To Phone:</label>
 									         <input class="form-control" placeholder="Phone" name="invoicetophone" type="text"
-									                                     value=""/>
+									           value="{{$editorder[0]->Phone}}"/>
 								           </div>
 								           <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Ship To Country:</label>
 									         <input class="form-control" placeholder="Phone" name="shiptocountry" type="text"
-									                                     value=""/>
+									          value="{{$editorder[0]->ShipCountry}}"/>
 								           </div>
 								           
 								       </div>
@@ -246,7 +253,7 @@ Register Page
 	                                     	<div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Ship to Po No:</label>
 									         <input class="form-control" placeholder="Phone" name="shiptopono" type="text"
-									                                     value=""/>
+									          value="{{$editorder[0]->ShipToPONumber}}"/>
 								           </div>
 								           <div class="col-xs-12 col-sm-6 col-md-6">
 		                                     <label>Shipping Method:</label>
@@ -272,37 +279,37 @@ Register Page
 							               <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Ship To Phone:</label>
 									         <input class="form-control" placeholder="Phone" name="shiptophone" type="text"
-									                                     value=""/>
+									           value="{{$editorder[0]->ShipPhone}}"/>
 								           </div>
 								           <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Ship To Address:</label>
 									         <input class="form-control" placeholder="Phone" name="shiptoaddress1" type="text"
-									                                     value=""/>
+									          value="{{$editorder[0]->ShipAddress}}"/>
 								           </div>
 								           <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Ship To Address2</label>
 									         <input class="form-control" placeholder="Phone" name="shiptoaddress2" type="text"
-									                                     value=""/>
+									           value="{{$editorder[0]->ShipAddress2}}"/>
 								           </div>
 								           <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Ship To State:</label>
 									         <input class="form-control" placeholder="Phone" name="shiptostate" type="text"
-									                                     value=""/>
+									           value="{{$editorder[0]->ShipRegion}}"/>
 								           </div>
 								           <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Ship To City:</label>
 									         <input class="form-control" placeholder="Phone" name="shiptocity" type="text"
-									                                     value=""/>
+									          value="{{$editorder[0]->ShipCity}}"/>
 								           </div>
 								           <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Ship To PostalCode</label>
 									         <input class="form-control" placeholder="Phone" name="shiptopostalcode" type="text"
-									                                     value=""/>
+									          value="{{$editorder[0]->ShipPostalCode}}"/>
 								           </div>
 								           <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Ship To Country:</label>
 									         <input class="form-control" placeholder="Phone" name="shiptocountry" type="text"
-									                                     value=""/>
+									           value="{{$editorder[0]->ShipCountry}}"/>
 								           </div>
 								           
 								       </div>
@@ -333,27 +340,27 @@ Register Page
 							               <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Confirm Number:</label>
 									         <input class="form-control" placeholder="Phone" name="number" type="text"
-									                                     value=""/>
+									          value=""/>
 								           </div>
 								           <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Freight Charge:</label>
 									         <input class="form-control" placeholder="Phone" name="charge" type="text"
-									                                     value=""/>
+									          value="{{$editorder[0]->FreightCharge}}"/>
 								           </div>
 								           <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Freight Deductions:</label>
 									         <input class="form-control" placeholder="Phone" name="deduction" type="text"
-									                                     value=""/>
+									          value="{{$editorder[0]->FreightDeductions}}"/>
 								           </div>
 								           <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Customer Rate:</label>
 									         <input class="form-control" placeholder="Phone" name="customerrate" type="text"
-									                                     value=""/>
+									          value="{{$editorder[0]->CustomerRate}}"/>
 								           </div>
 								              <div class="col-xs-12 col-sm-6 col-md-6">
 									         <label>Drop:</label>
 									         <input class="form-control" placeholder="Phone" name="drop" type="text"
-									                                     value=""/>
+									          value="{{$editorder[0]->Drop}}"/>
 								           </div>
 								       </div>
 							            </div>
@@ -365,47 +372,60 @@ Register Page
                                         <div class="col-xs-12 col-sm-8 col-md-8">
                                         	  <label>Jacket Notes:</label>
                                         	  <br>
-                                        	  <textarea class="form-control" placeholder="Jacket Notes" name="jacketnotes">
+                                        	  <textarea class="form-control" placeholder="Jacket Notes" name="jacketnotes" value="{{$editorder[0]->JacketNotes}}">
 	                                     </textarea>
 	                                 </div>
                                  <div class="cont" style="margin-top: 20px;">
+                                 	<input type="hidden" id="rows" value="{{$countdata}}"/>
 							    <button class="add_form btn btn-primary">Add Item </span>
 							    </button>
+                                
 							    <div class ="row">
-                               
-                                        <div class="col-xs-12 col-sm-2 col-md-2">
-		                                     <label>Product Code:</label>
-		                                    <select  class="form-control" name="productcode[]">
-		                                    	@foreach($Products_data as $data)
-		                                     	<option value="{{$data->ProductID}}">{{$data->ProductCode}}</option>
-		                                     	@endforeach
-		                                     </select>
-	                                     </div> 
-	                                       <div class="col-xs-12 col-sm-2 col-md-2">
-		                                     <label>Product Name:</label>
-		                                    <select  class="form-control" name="productname[]">
-		                                    	@foreach($Products_data as $data)
-		                                     	<option value="{{$data->ProductID}}">{{$data->ProductName}}</option>
-		                                     	@endforeach
-		                                     </select>
-	                                     </div> 
-								    <div  class="col-xs-12 col-sm-1 col-md-1">
+                                       
+                                       
+	                                  @foreach($purchase_data as $pro_data)
+								    <div  class="col-xs-12 col-sm-2 col-md-2">
 								    	 <label>Brand:</label>
-								      <input type="text" name="brand[]">
+								      <input type="text" name="brand[]" value="{{$pro_data->Discount}}">
 								    </div>
 								    <div  class="col-xs-12 col-sm-2 col-md-2">
 								    	 <label>Unit Price:</label>
-								      <input type="text" name="unitprice[]">
+								      <input type="text" name="unitprice[]" value="{{$pro_data->UnitPrice}}">
 								    </div>
-								    <div  class="col-xs-12 col-sm-1 col-md-1">
+								    <div  class="col-xs-12 col-sm-2 col-md-2">
 								    	 <label>Quantity:</label>
-								      <input type="text" name="quantity[]">
+								      <input type="text" name="quantity[]" value="{{$pro_data->Quantity}}">
 								    </div>
 								    <div  class="col-xs-12 col-sm-2 col-md-2">
 								    	 <label>Pallet Type:</label>
-								      <input type="text" name="pallettype[]">
+								      <input type="text" name="pallettype[]" value="{{$pro_data->PalletType}}">
 								    </div>
+
+								   
+								    @for($i=0; $i< count($pro_data); $i++)
+                                        <div class="col-xs-12 col-sm-2 col-md-2">
+		                                     <label>Product Code:</label>
+		                                    <select  class="form-control" name="productcode[]">
+		                                    	@foreach($Products_data as $prodata)
+		                                     	<option value="{{$prodata->ProductID}}">{{$prodata->ProductCode}}</option>
+		                                     	@endforeach
+		                                     </select>
+	                                     </div> 
+	                                       <div class="col-xs-12 col-sm-1 col-md-1">
+		                                     <label>Product Name:</label>
+		                                    <select  class="form-control" name="productname[]">
+		                                    	@foreach($Products_data as $p_data)
+		                                     	<option value="{{$p_data->ProductID}}">{{$p_data->ProductName}}</option>
+		                                     	@endforeach
+		                                     </select>
+	                                     </div> 
+	                                     
+	                                     <a href="#"  class="delete">Remove</a>
+	                                 
+	                                     @endfor
+                                         @endforeach
 								</div>
+								
 							</div>
 					           
 								  <div class="container" style="margin-top: 20px;">

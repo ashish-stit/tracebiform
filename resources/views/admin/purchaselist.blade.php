@@ -49,7 +49,7 @@
                         <i class="fa fa-plus fa-fw"></i>Add Purchase Order</a>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive-lg table-responsive-sm table-responsive-md">
+                        <div class="table-responsive table-responsive-lg table-responsive-sm table-responsive-md">
                             <table class="table table-bordered" id="table">
                                 <thead>
                                 <tr class="filters">

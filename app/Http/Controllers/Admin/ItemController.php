@@ -135,6 +135,7 @@ class ItemController extends Controller
 				$ids=DB::select('select ProductSupplyID as ids from productsupplys where ProductID='.$p_ProductID);
 			
             $countdata=$data[0]->abc;
+            $ProductmultipleID=$request->ProductmultipleID;
 			$p_ProductCode=$request->productcode;
 			$p_ProductName=$request->productname;
 			$p_CategoryID=$request->productcategory;
@@ -154,22 +155,23 @@ class ItemController extends Controller
 			$p_ProductWeight=$request->weight;
 			$p_VendorUCC=$request->VendorUCC;
 			$p_ProductTypeID=$request->producttype;
-			$p_SupplyID=$request->producttype;
+			$p_SupplyID=$request->wraper;
 			$p_qry=$request->quantity;
+			$p_ProductSupplyID=$request->ProductSupplyID;
+			$p_ProductSuppID='';
 			DB::update('call USP_Products_Update(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',array($p_ProductID,$p_ProductCode,$p_ProductName,$p_CategoryID,$p_QuantityPerPallet,$p_PalletType,$p_UnitPrice,$p_Discontinued,$p_Brand,$p_Grade,$p_FieldNo,$p_LotNo,$p_WarehouseLocation,$p_productBarCode,$p_Comments,$p_Active,$p_RetailUPCCode,$p_ProductWeight,$p_VendorUCC,$p_ProductTypeID));
 
 			  for($i=0;$i<count($p_qry);$i++)
 		        {
-		        	 $p_ProductSupplyID=$ids[0]->ids;
-                        
+		        	    
                         if($i<$countdata)
 			        	{
 
-			        	DB::update('call USP_ProductSupplys_Update(?,?,?,?)',array($p_ProductSupplyID,$p_ProductID,$p_SupplyID,$p_qry[$i]));
+			        	DB::update('call USP_ProductSupplys_Update(?,?,?,?)',array($p_ProductSupplyID[$i],$ProductmultipleID[$i],$p_SupplyID[$i],$p_qry[$i]));
 			           }
 		        else
 		        {
-		        	DB::insert('call USP_ProductSupplys_Insert(?,?,?,?)',array($p_ProductID,$p_SupplyID,$p_qry[$i],$p_ProductSupplyID));
+		        	DB::insert('call USP_ProductSupplys_Insert(?,?,?,?)',array($ProductmultipleID,$p_SupplyID[$i],$p_qry[$i],$p_ProductSupplyID));
 		        	
 		        }
 		    

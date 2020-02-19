@@ -95,6 +95,11 @@ Register Page
                             <!-- CSRF Token -->
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                            <input type="hidden" name="ProductID" value="{{$product_data[0]->ProductID  }}" />
+                           @foreach($supply_data as $supp_data)
+                           <input type="hidden" name="ProductmultipleID[]" value="{{$supp_data->ProductID  }}" />
+                            <input type="hidden" name="ProductSupplyID[]" value="{{$supp_data->ProductSupplyID  }}" />
+                           @endforeach
+                           
 
 
                             <fieldset>
@@ -215,7 +220,7 @@ Register Page
 						     @foreach($supply_data as $data_suplys)
 						    <div>
 						 <input type="text" name="quantity[]" value="{{$data_suplys->Qry}}">
-						    <select name="wraper">
+						    <select name="wraper[]">
 						    <option value="{{$data_suplys->ProductID}}">{{$data_suplys->SupplyID}}</option>
 						      </select>
 						      <a href="#"  class="delete">Remove</a>
